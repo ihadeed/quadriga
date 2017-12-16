@@ -14,3 +14,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-tabs {
+ .tabbar {
+   a.tab-button[aria-selected="true"] {
+     ion-icon:before {
+       color: map_get($colors, secondary);
+     }
+     span.tab-button-text {
+       color: map_get($colors, secondary);
+     }
+   }
+ }
+}
