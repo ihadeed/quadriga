@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Trades</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-segment color="light" [(ngModel)]="book">
+      <ion-segment-button value="btc_cad">BTC</ion-segment-button>
+      <ion-segment-button value="ltc_cad">LTC</ion-segment-button>
+      <ion-segment-button value="eth_cad">ETH</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <h2>Bids</h2>
+  <ion-list>
+    <ion-item *ngFor="let bid of (trades | async)?.bids">
+      <ion-label>
+        <h2>{{ bid[0] | currency }}</h2>
+        <p>QTY: {{ bid[1] }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <h2>Asks</h2>
+  <ion-list>
+    <ion-item *ngFor="let ask of (trades | async)?.asks">
+      <ion-label>
+        <h2>{{ ask[0] | currency }}</h2>
+        <p>QTY: {{ ask[1] }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

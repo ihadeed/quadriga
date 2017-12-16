@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Prices</ion-title>
+    <ion-buttons end>
+      <button icon-only ion-button (click)="reorder = !reorder" [color]="reorder? 'secondary' : 'light'">
+        <ion-icon name="reorder"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list [reorder]="reorder" (ionItemReorder)="reorderItems($event)" no-lines>
+    <ion-item *ngFor="let book of books">
+      <ion-note item-start>{{ book.name }}</ion-note>
+      <ion-label>
+        <h2>{{ (book.ticker | async)?.last | currency }}</h2>
+        <p>High: {{ (book.ticker | async)?.high | currency }}</p>
+        <p>Low: {{ (book.ticker | async)?.low | currency }}</p>
+        <p>VWAP: {{ (book.ticker | async)?.vwap | currency }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

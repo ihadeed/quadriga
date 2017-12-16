@@ -1,0 +1,24 @@
+page-trades {
+
+  .scroll-content > h2 {
+    font-weight: 300;
+    font-size: 18px;
+    color: map_get($colors, secondary);
+    text-transform: uppercase;
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+  }
+
+  ion-segment.segment {
+    ion-segment-button.segment-button.segment-activated {
+      border-color: map_get($colors, secondary);
+    }
+  }
+
+  ion-list {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+}

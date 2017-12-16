@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Portfolio</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div text-center>
+    <ion-chip>
+      <ion-icon name="cash"></ion-icon>
+      <ion-label color="secondary">
+        Estimated total: {{ totalValue | async | currency }}
+      </ion-label>
+    </ion-chip>
+  </div>
+
+  <ion-list no-lines>
+    <ion-item *ngFor="let entry of entries">
+      <ion-note item-left>
+        {{ entry.currency }}
+      </ion-note>
+      <ion-label>
+        <h2>{{ getPrice(entry.currency) | async | currency }}</h2>
+        <p>{{ entry.value + entry.currency}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab bottom right>
+    <button ion-fab color="secondary" (click)="add()">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
