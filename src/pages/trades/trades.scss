@@ -4,7 +4,7 @@ page-trades {
     font-weight: 300;
     font-size: 18px;
     color: map_get($colors, secondary);
-    text-transform: uppercase;
+    //text-transform: uppercase;
     &:not(:first-child) {
       margin-top: 30px;
     }

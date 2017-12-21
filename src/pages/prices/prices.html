@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list [reorder]="reorder" (ionItemReorder)="reorderItems($event)" no-lines>
+  <ion-list [reorder]="reorder" (ionItemReorder)="reorderItems($event)" no-lines list-style-1>
     <ion-item *ngFor="let book of books">
       <ion-note item-start>{{ book.name }}</ion-note>
       <ion-label>

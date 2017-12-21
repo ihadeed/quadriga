@@ -27,6 +27,14 @@ export type Book = 'ltc_cad' | 'btc_cad' | 'eth_cad';
 @Injectable()
 export class QuadProvider {
 
+  shouldFetchTrades = {
+    btc_cad: false,
+    ltc_cad: false,
+    eth_cad: false
+  };
+
+  shouldFetchPrices: boolean = true;
+
   constructor(public http: HttpClient, private store: Store<IAppState>) {}
 
   init() {
@@ -35,8 +43,8 @@ export class QuadProvider {
     this.createPriceObs('eth_cad', 2);
 
     this.createTradesObs('btc_cad');
-    this.createTradesObs('ltc_cad', 1);
-    this.createTradesObs('eth_cad', 2);
+    this.createTradesObs('ltc_cad');
+    this.createTradesObs('eth_cad');
   }
 
   getTicker(book: Book) {
@@ -76,6 +84,7 @@ export class QuadProvider {
 
   createPriceObs(book: Book, delay: number = 0) {
       const getTicker = () => {
+        if (!this.shouldFetchPrices) return;
         this.getTicker(book).then(val => {
           this.store.dispatch({
             type: 'SET_PRICES_' + book,
@@ -93,8 +102,9 @@ export class QuadProvider {
       }, delay * 2500)
   }
 
-  createTradesObs(book: Book, delay: number = 0) {
+  createTradesObs(book: Book) {
     const getTrades = () => {
+      if (this.shouldFetchTrades[book] === false) return;
       this.getTrades(book).then(val => {
         this.store.dispatch({
           type: 'SET_TRADES_' + book,
@@ -103,11 +113,8 @@ export class QuadProvider {
       });
     };
 
-    setTimeout(() => {
-      setInterval(getTrades.bind(this), 5000);
-
-      getTrades();
-    }, delay * 3500);
+    setInterval(getTrades.bind(this), 5000);
+    getTrades();
   }
 
   private setLastTicker(book: Book, val: ITicker) {
